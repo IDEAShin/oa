@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository("departmentDao")
 public interface DepartmentDao {
+
     void insert(Department department);
 
     void update(Department department);

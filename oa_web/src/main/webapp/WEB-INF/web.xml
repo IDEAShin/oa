@@ -27,11 +27,11 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/assets/*</url-pattern>
         <url-pattern>/js/*</url-pattern>
-        <url-pattern>/*.js</url-pattern>
-        <url-pattern>/*.jsg</url-pattern>
-        <url-pattern>/*.gif</url-pattern>
-        <url-pattern>/*.png</url-pattern>
-        <url-pattern>/*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.jsg</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.css</url-pattern>
     </servlet-mapping>
 
     <!-- 配置springmvc的加载 -->
