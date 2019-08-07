@@ -22,7 +22,7 @@ public class DepartmentController {
 
     @RequestMapping("/list")
     public String list(Map<String, Object> map) { //map是java的类型，不依赖与springmvc
-        System.out.println("222");
+
         map.put("list", departmentBiz.getAll());
         return "department_list";
     }

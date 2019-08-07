@@ -9,7 +9,7 @@
         </div>
         <div class="admin-form theme-primary mw1000 center-block" style="padding-bottom: 175px;">
             <div class="panel heading-border">
-                <form:form action="/employee/update" modelAttribute="employee"  id="admin-form" name="addForm">
+                <form:form action="/employee/edit" modelAttribute="employee"  id="admin-form" name="addForm">
                     <form:hidden path="password"/>
                     <div class="panel-body bg-light">
                         <div class="section-divider mt20 mb40">

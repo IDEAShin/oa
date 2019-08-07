@@ -7,14 +7,23 @@ package com.ideashin.oa.entity;
  */
 public class Employee {
     private String sn;
-
     private String password;
-
     private String name;
-
     private String departmentSn;
-
     private String post;
+
+    /**
+     * 新增部门属性
+     **/
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public String getSn() {
         return sn;

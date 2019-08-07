@@ -1,6 +1,7 @@
 package com.ideashin.oa.dao;
 
 import com.ideashin.oa.entity.Employee;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @Date: 2019/8/5 18:16
  * @Blog: ideashin.com
  */
+@Repository("employeeDao")
 public interface EmployeeDao {
 
     void insert(Employee employee);

@@ -1,7 +1,6 @@
 package com.ideashin.oa.biz;
 
 import com.ideashin.oa.entity.Department;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

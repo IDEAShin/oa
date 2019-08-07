@@ -1,5 +1,6 @@
 package com.ideashin.oa.biz.impl;
 
+import com.ideashin.oa.biz.DepartmentBiz;
 import com.ideashin.oa.dao.DepartmentDao;
 import com.ideashin.oa.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
  * @Blog: ideashin.com
  */
 @Service("departmentBiz")
-public class DepartmentBizImpl implements com.ideashin.oa.biz.DepartmentBiz {
+public class DepartmentBizImpl implements DepartmentBiz {
 
     @Autowired
     private DepartmentDao departmentDao;
