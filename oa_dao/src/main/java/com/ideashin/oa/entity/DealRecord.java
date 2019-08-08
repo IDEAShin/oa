@@ -8,6 +8,7 @@ import java.util.Date;
  * @Author: Shin
  * @Date: 2019/8/5 14:02
  * @Blog: ideashin.com
+ * 报销单审核记录
  */
 public class DealRecord {
     private Integer id;
@@ -24,6 +25,19 @@ public class DealRecord {
     private String dealResult;
 
     private String comment;
+
+    /**
+     * 处理人姓名
+     */
+    private Employee dealer;
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
+    }
 
     public Integer getId() {
         return id;

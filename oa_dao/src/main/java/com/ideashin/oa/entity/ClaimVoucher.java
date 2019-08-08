@@ -8,6 +8,7 @@ import java.util.Date;
  * @Author: Shin
  * @Date: 2019/8/5 14:02
  * @Blog: ideashin.com
+ * 报销单
  */
 public class ClaimVoucher {
     private Integer id;
@@ -15,6 +16,7 @@ public class ClaimVoucher {
     private String cause;
 
     private String createSn;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createTime;
 
@@ -23,4 +25,84 @@ public class ClaimVoucher {
     private Double totalAmount;
 
     private String status;
+    /**
+     * 创建者
+     */
+    private Employee creater;
+    /**
+     * 处理人
+     */
+    private Employee dealer;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public String getCreateSn() {
+        return createSn;
+    }
+
+    public void setCreateSn(String createSn) {
+        this.createSn = createSn;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getNextDealSn() {
+        return nextDealSn;
+    }
+
+    public void setNextDealSn(String nextDealSn) {
+        this.nextDealSn = nextDealSn;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Employee getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Employee creater) {
+        this.creater = creater;
+    }
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
+    }
 }

@@ -4,6 +4,7 @@ package com.ideashin.oa.entity;
  * @Author: Shin
  * @Date: 2019/8/5 14:02
  * @Blog: ideashin.com
+ * 报销单花销条目
  */
 public class ClaimVoucherItem {
     private Integer id;
