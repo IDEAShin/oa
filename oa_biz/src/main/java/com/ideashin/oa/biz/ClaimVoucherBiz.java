@@ -67,4 +67,10 @@ public interface ClaimVoucherBiz {
      * @param id
      */
     void submit(Integer id);
+
+    /**
+     * 审核报销单
+     * @param dealRecord
+     */
+    void deal(DealRecord dealRecord);
 }

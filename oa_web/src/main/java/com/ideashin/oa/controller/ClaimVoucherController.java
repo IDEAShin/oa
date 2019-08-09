@@ -2,6 +2,7 @@ package com.ideashin.oa.controller;
 
 import com.ideashin.oa.biz.ClaimVoucherBiz;
 import com.ideashin.oa.dto.ClaimVoucherInfo;
+import com.ideashin.oa.entity.DealRecord;
 import com.ideashin.oa.entity.Employee;
 import com.ideashin.oa.global.Contant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class ClaimVoucherController {
     public String detail(int id, Map<String, Object> map) {
         map.put("claimVoucher", claimVoucherBiz.get(id));
         map.put("items", claimVoucherBiz.getItems(id));
-        map.put(("records"), claimVoucherBiz.getRecord(id));
+        map.put("records", claimVoucherBiz.getRecord(id));
         return "claim_voucher_detail";
     }
 
@@ -95,5 +96,26 @@ public class ClaimVoucherController {
         claimVoucherBiz.submit(id);
         return "redirect:deal";
     }
+
+    @RequestMapping(value = "/to_check", params = "id")
+    public String toCheck(int id, Map<String, Object> map) {
+        map.put("claimVoucher", claimVoucherBiz.get(id));
+        map.put("items", claimVoucherBiz.getItems(id));
+        map.put("records", claimVoucherBiz.getRecord(id));
+        /** ? */
+        DealRecord dealRecord = new DealRecord();
+        dealRecord.setClaimVoucherId(id);
+        map.put("record", dealRecord);
+        return "claim_voucher_check";
+    }
+
+    @RequestMapping("/check")
+    public String check(HttpSession session, DealRecord dealRecord) {
+        Employee employee = (Employee) session.getAttribute("employee");
+        dealRecord.setDealSn(employee.getSn());
+        claimVoucherBiz.deal(dealRecord);
+        return "redirect:deal";
+    }
+
 
 }

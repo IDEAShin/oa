@@ -51,7 +51,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
     public void edit(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items) {
         /** 因为修改完还是要提交的，所以还是处理人本身和新创建状态 */
         claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
-        claimVoucher.setStatus(Contant.CLAIMVOUCHER_CREATED);
+        claimVoucher.setStatus(Contant.CLAIMVOUCHER_SUBMIT);
 
         claimVoucherDao.update(claimVoucher);
         /** 有传递过来的集合，以及本来存在的集合，所以需要进行判断 */
@@ -117,6 +117,56 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
         dealRecord.setDealResult(Contant.CLAIMVOUCHER_SUBMIT);
         dealRecord.setDealTime(new Date());
         dealRecord.setComment("无");
+        dealRecordDao.insert(dealRecord);
+    }
+
+    public void deal(DealRecord dealRecord) {
+        ClaimVoucher claimVoucher = claimVoucherDao.select(dealRecord.getClaimVoucherId());
+        Employee employee = employeeDao.select(dealRecord.getDealSn());
+
+        /**
+         * 通过：金额小于等于5000或者是总经理则通过打款，否则交给总经理处理
+         * 打回：则设置审核人为提交人
+         * 终止：设置代理人为空
+         * 打款：设置代理人为空
+         */
+        dealRecord.setDealTime(new Date());
+        if (dealRecord.getDealWay().equals(Contant.DEAL_PASS)) {
+            if (claimVoucher.getTotalAmount() <= Contant.LIMIT_CHECK || employee.getPost().equals(Contant.POST_GM)) {
+                claimVoucher.setStatus(Contant.CLAIMVOUCHER_APPROVED);
+                /**  不管是那个部门，只要是财务就可以 */
+                claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null, Contant.POST_CASHIER).get(0).getSn());
+
+                dealRecord.setDealResult(Contant.CLAIMVOUCHER_APPROVED);
+            } else {
+                claimVoucher.setStatus(Contant.CLAIMVOUCHER_RECHECK);
+                /** 复审处理人交给总经理 */
+                claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null, Contant.POST_GM).get(0).getSn());
+
+                dealRecord.setDealResult(Contant.CLAIMVOUCHER_RECHECK);
+            }
+        } else if (dealRecord.getDealWay().equals(Contant.DEAL_BACK)) {
+            claimVoucher.setStatus(Contant.CLAIMVOUCHER_BACK);
+            /** 设置审核人为提交人 */
+            claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
+
+            dealRecord.setDealTime(new Date());
+            dealRecord.setDealResult(Contant.CLAIMVOUCHER_BACK);
+        } else if (dealRecord.getDealWay().equals(Contant.DEAL_REJECT)) {
+            claimVoucher.setStatus(Contant.CLAIMVOUCHER_TERMINATED);
+            /** 设置审核人为空 */
+            claimVoucher.setNextDealSn(null);
+
+            dealRecord.setDealResult(Contant.CLAIMVOUCHER_TERMINATED);
+        } else if (dealRecord.getDealWay().equals(Contant.DEAL_PAID)) {
+            claimVoucher.setStatus(Contant.CLAIMVOUCHER_PAID);
+            /** 设置审核人为空 */
+            claimVoucher.setNextDealSn(null);
+
+            dealRecord.setDealResult(Contant.CLAIMVOUCHER_PAID);
+        }
+
+        claimVoucherDao.update(claimVoucher);
         dealRecordDao.insert(dealRecord);
     }
 }
