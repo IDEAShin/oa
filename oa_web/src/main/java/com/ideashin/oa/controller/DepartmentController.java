@@ -56,5 +56,4 @@ public class DepartmentController {
          departmentBiz.remove(sn);
         return "redirect:list";
     }
-
 }

@@ -21,6 +21,13 @@ public interface ClaimVoucherBiz {
     void save(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
 
     /**
+     * 修改报销单
+     * @param claimVoucher 报销单
+     * @param items 报销单条目集合
+     */
+    void edit(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
+
+    /**
      * 获取报销单对象
      * @param id 报销单编号
      * @return
@@ -55,4 +62,9 @@ public interface ClaimVoucherBiz {
      */
     List<ClaimVoucher> getForDeal(String ndsn);
 
+    /**
+     * 提交
+     * @param id
+     */
+    void submit(Integer id);
 }

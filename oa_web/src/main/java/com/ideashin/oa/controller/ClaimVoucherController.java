@@ -35,7 +35,25 @@ public class ClaimVoucherController {
         Employee employee = (Employee) session.getAttribute("employee");
         info.getClaimVoucher().setCreateSn(employee.getSn());
         claimVoucherBiz.save(info.getClaimVoucher(), info.getItems());
-        return "redirect:detail?id=" + info.getClaimVoucher().getId();
+        return "redirect:deal";
+    }
+
+    @RequestMapping(value = "/to_edit", params = "id")
+    public String toEdit(int id, Map<String, Object> map) {
+        map.put("items", Contant.getItems());
+        ClaimVoucherInfo info = new ClaimVoucherInfo();
+        info.setClaimVoucher(claimVoucherBiz.get(id));
+        info.setItems(claimVoucherBiz.getItems(id));
+        map.put("info", info);
+        return "claim_voucher_edit";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(HttpSession session, ClaimVoucherInfo info) {//与上面的info对应
+        Employee employee = (Employee) session.getAttribute("employee");
+        info.getClaimVoucher().setCreateSn(employee.getSn());
+        claimVoucherBiz.edit(info.getClaimVoucher(), info.getItems());
+        return "redirect:deal";
     }
 
     @RequestMapping("/detail")
@@ -71,4 +89,11 @@ public class ClaimVoucherController {
         map.put("list", claimVoucherBiz.getForDeal(employee.getSn()));
         return "claim_voucher_deal";
     }
+
+    @RequestMapping("/submit")
+    public String submit(Integer id) {
+        claimVoucherBiz.submit(id);
+        return "redirect:deal";
+    }
+
 }

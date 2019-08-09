@@ -1,6 +1,7 @@
 package com.ideashin.oa.dao;
 
 import com.ideashin.oa.entity.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +24,11 @@ public interface EmployeeDao {
 
     List<Employee> selectAll();
 
+    /**
+     * 根据部门编号和职务查询员工：两个参数，需要使用注解
+     * @param dsn
+     * @param post
+     * @return
+     */
+    List<Employee> selectByDepartmentAndPost(@Param("dsn") String dsn, @Param("post") String post);
 }

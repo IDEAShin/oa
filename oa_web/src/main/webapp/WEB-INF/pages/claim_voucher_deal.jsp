@@ -69,7 +69,7 @@
                             <td><spring:eval expression="cv.createTime"/></td>
                             <td>
                                 <c:if test="${cv.status==Contant.CLAIMVOUCHER_CREATED || cv.status==Contant.CLAIMVOUCHER_BACK}">
-                                    <a href="/claim_voucher/to_update?id=${cv.id}">修改</a>
+                                    <a href="/claim_voucher/to_edit?id=${cv.id}">修改</a>
                                     <a href="/claim_voucher/submit?id=${cv.id}">提交</a>
                                 </c:if>
                                 <c:if test="${cv.status==Contant.CLAIMVOUCHER_SUBMIT || cv.status==Contant.CLAIMVOUCHER_RECHECK}">
